@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/bulma.min.css" />
+    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <style>
+        
+        /* Green theme style */
+        
+        body {
+            background-color: #eafaf1;
+            font-family: Arial, sans-serif;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .navigation-bar {
+            background-color: #2d6a4f;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navigation-bar-left div,
+        .navigation-bar-right div {
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .search-input {
+            padding: 5px;
+            border: 1px solid #2d6a4f;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            background-color: #40916c;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 5px;
+            border-radius: 5px;
+        }
+
+        .box {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .label {
+            color: #2d6a4f;
+            font-weight: bold;
+        }
+
+        .input, .checkbox {
+            border: 1px solid #2d6a4f;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .button {
+            background-color: #40916c;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .button.is-light {
+            background-color: #d9f2e3;
+            color: #2d6a4f;
+        }
+
+        .button.is-link {
+            background-color: #40916c;
+        }
+
+        .notification {
+            background-color: #eafaf1;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .notification.is-success {
+            background-color: #c7f9cc;
+        }
+
+        .notification.is-danger {
+            background-color: #ffccd5;
+        }
+
+        .delete {
+            background: none;
+            border: none;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% block body %}{% endblock%}
+</body>
+</html>
