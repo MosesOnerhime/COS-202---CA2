@@ -1,22 +1,20 @@
-import { Controller, Get, Post, Body, Param, Delete, Render, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Render, Put, ParseIntPipe } from '@nestjs/common';
 import { PatientsService } from './patients.service';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 
 @Controller('patients')
 export class PatientsController {
-  
   constructor(private readonly patientsService: PatientsService) {}
 
   @Get('create')
   @Render('patients/create-patient.html')
-  createForm() {
-  }
-  
+  createForm() {}
+
   @Post()
   async create(@Body() createPatientDto: CreatePatientDto) {
     const createdPatient = await this.patientsService.create(createPatientDto);
-    return { ...createdPatient, matric: createPatientDto.matric }; // Return the created patient data with updated 'matric'
+    return { ...createdPatient, matric: createPatientDto.matric };
   }
 
   @Get()
@@ -27,17 +25,36 @@ export class PatientsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.patientsService.findOne(+id);
+  @Render('patients/patient-detail.html')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const patient = await this.patientsService.findOne(id);
+    return { patient };
+  }
+
+  @Get('edit/:id')
+  @Render('patients/edit-patient.html')
+  async editForm(@Param('id', ParseIntPipe) id: number) {
+    const patient = await this.patientsService.findOne(id);
+    return { patient };
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdatePatientDto) {
-    return this.patientsService.update(+id, updateUserDto);
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updatePatientDto: UpdatePatientDto) {
+    await this.patientsService.update(id, updatePatientDto);
+    return { message: 'Patient updated successfully' };
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.patientsService.remove(+id);
+  async deletePatient(@Param('id', ParseIntPipe) id: number) {
+    await this.patientsService.deletePatient(id);
+    return { message: 'Patient deleted successfully' };
   }
+
+  @Get(':id/clinic-records/create')
+  @Render('patients/clinic-records.html')
+  createClinicRecordForm(@Param('id', ParseIntPipe) id: number) {
+    return { patientId: id };
+  }
+
+  
 }

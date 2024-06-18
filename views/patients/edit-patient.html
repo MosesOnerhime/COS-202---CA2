@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="title has-text-centered">Edit Patient</h1>
+    <form id="editPatientForm" action="/patients/{{ patient.id }}" method="post">
+        <input type="hidden" name="_method" value="put">
+        
+        <div class="field">
+            <label class="label">First Name</label>
+            <div class="control">
+                <input class="input" type="text" name="firstName" value="{{ patient.firstName }}" required>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label class="label">Middle Name</label>
+            <div class="control">
+                <input class="input" type="text" name="middleName" value="{{ patient.middleName }}">
+            </div>
+        </div>
+        
+        <div class="field">
+            <label class="label">Last Name</label>
+            <div class="control">
+                <input class="input" type="text" name="lastName" value="{{ patient.lastName }}" required>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label class="label">Date of Birth</label>
+            <div class="control">
+                <input class="input" type="date" name="dateOfBirth" value="{{ patient.dateOfBirth }}" required>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label class="label">Address</label>
+            <div class="control">
+                <input class="input" type="text" name="address" value="{{ patient.address }}">
+            </div>
+        </div>
+        
+        <div class="field">
+            <label class="label">Date of Registration</label>
+            <div class="control">
+                <input class="input" type="date" name="dateOfReg" value="{{ patient.dateOfReg }}" required>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label class="label">Matric</label>
+            <div class="control">
+                <input class="input" type="text" name="matric" value="{{ patient.matric }}" pattern="_[0-9]+" required>
+            </div>
+        </div>
+        
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-link" type="submit">Update</button>
+            </div>
+            <div class="control">
+                <a class="button is-light" href="/patients">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

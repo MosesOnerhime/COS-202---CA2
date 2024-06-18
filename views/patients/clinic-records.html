@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="title has-text-centered">Clinic Records</h1>
+    <div class="box">
+        <form id="clinicRecordsForm">
+            <div class="field">
+                <label class="label">Clinic Date:</label>
+                <div class="control">
+                    <input class="input" id="clinicDate" name="clinicDate" type="date" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Nature of Ailment:</label>
+                <div class="control">
+                    <textarea class="textarea" id="natureOfAilment" name="natureOfAilment" rows="3" placeholder="Brief description" required></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Medicine Prescribed:</label>
+                <div class="control">
+                    <input class="input" id="medicinePrescribed" name="medicinePrescribed" type="text" placeholder="Medicine prescribed, if any">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Procedure Undertaken:</label>
+                <div class="control">
+                    <input class="input" id="procedureUndertaken" name="procedureUndertaken" type="text" placeholder="Dental procedure carried out, if any">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Date of Next Appointment:</label>
+                <div class="control">
+                    <input class="input" id="nextAppointmentDate" name="nextAppointmentDate" type="date">
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button is-link">Save</button>
+                </div>
+                <div class="control">
+                    <button type="reset" class="button is-light">Clear</button>
+                </div>
+                <div class="control">
+                    <a class="button is-light" href="/patients">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

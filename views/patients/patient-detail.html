@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="title has-text-centered">Patient Details</h1>
+    <table class="table is-fullwidth">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ patient.id }}</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>{{ patient.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Middle Name</th>
+                <td>{{ patient.middleName }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{ patient.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>{{ patient.dateOfBirth }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ patient.address }}</td>
+            </tr>
+            <tr>
+                <th>Matric</th>
+                <td>{{ patient.matric }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="button is-primary" href="/patients">Back to Patients List</a>
+    <a class="button is-success" href="/patients/{{ patient.id }}/clinic-records/create">Create Clinic Record</a>
+</div>
+{% endblock %}

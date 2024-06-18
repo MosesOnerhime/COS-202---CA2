@@ -12,6 +12,7 @@
                 <th>Date of Birth</th>
                 <th>Address</th>
                 <th>Matric</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,9 +24,90 @@
                 <td>{{ patient.dateOfBirth }}</td>
                 <td>{{ patient.address }}</td>
                 <td>{{ patient.matric }}</td>
+                <td>
+                    <a class="button is-small is-info" href="/patients/{{ patient.id }}">View</a>
+                    <a class="button is-small is-warning" href="/patients/edit/{{ patient.id }}">Edit</a>
+                    <form id="deletePatientForm_{{ patient.id }}" action="/patients/{{ patient.id }}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete">
+                        <button class="button is-small is-danger delete-patient-btn" type="button" data-id="{{ patient.id }}">Delete</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a class="button is-primary" href="/patients/create">Add New Patient</a>
 </div>
+
+<section class="section">
+    <div class="container">
+        <div id="notification" class="notification is-hidden animated slideInUp">
+            <button class="delete"></button>
+            <div id="notificationMessage"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Get all delete buttons and add event listener
+    const deleteButtons = document.querySelectorAll('.delete-patient-btn');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+            const patientId = event.target.getAttribute('data-id');
+            const confirmation = confirm(`Are you sure you want to delete patient with ID ${patientId}?`);
+
+            if (!confirmation) {
+                return;
+            }
+
+            try {
+                // Start the button spinner
+                event.target.classList.add("is-loading");
+
+                // Prepare init for fetch
+                const init = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ _method: 'delete' })
+                };
+
+                // Call fetch to delete patient
+                const response = await fetch(`/patients/${patientId}`, init);
+                if (!response.ok) {
+                    throw new Error('Failed to delete patient');
+                }
+
+                // Show success message
+                document.getElementById("notificationMessage").innerHTML = 'Patient deletion successful';
+                // Add notification color class
+                document.getElementById("notification").classList.add("is-success-dark");
+                // Remove is-hidden from notification
+                document.getElementById("notification").classList.remove("is-hidden");
+
+                // Refresh the page after 1 second to reflect changes
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+
+            } catch (error) {
+                // Handle errors
+                console.error('Error:', error.message);
+
+                // Remove spinner class
+                event.target.classList.remove("is-loading");
+
+                // Set notification
+                document.getElementById("notificationMessage").innerHTML = error.message;
+                // Add notification color class
+                document.getElementById("notification").classList.add("is-danger");
+                // Remove is-hidden from notification
+                document.getElementById("notification").classList.remove("is-hidden");
+            }
+        });
+    });
+
+</script>
+
 {% endblock %}
