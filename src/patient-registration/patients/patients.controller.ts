@@ -14,13 +14,16 @@ export class PatientsController {
   }
   
   @Post()
-  create(@Body() createPatientDto: CreatePatientDto) {
-    return this.patientsService.create(createPatientDto);
+  async create(@Body() createPatientDto: CreatePatientDto) {
+    const createdPatient = await this.patientsService.create(createPatientDto);
+    return { ...createdPatient, matric: createPatientDto.matric }; // Return the created patient data with updated 'matric'
   }
 
   @Get()
-  findAll() {
-    return this.patientsService.findAll();
+  @Render('patients/patients.html')
+  async findAll() {
+    const patients = await this.patientsService.findAll();
+    return { patients };
   }
 
   @Get(':id')

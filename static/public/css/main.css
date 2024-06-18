@@ -31,6 +31,7 @@
     justify-content: flex-end;
 }
 
+
 .content-with-background-image{
     
     background-image: url(/public/img/image4.jpg);
@@ -38,11 +39,11 @@
     background-size: auto 1200px;
     background-repeat: no-repeat;
     
-    height: 500px;
+    height: 800px;
     font-size: 2em;
     border: 1px solid #eeeeee;
     padding: 10px 15px 10px 20px;
-    /*margin: 10px;*/
+
     
     
 }
