@@ -28,7 +28,7 @@ export class PatientsService {
     //return `This action returns a #${id} patient`;
     return await this.patientsRepository.findOne({
       where: {
-        id // same as id:id
+        id // same as id : id
       }
     });
   }
